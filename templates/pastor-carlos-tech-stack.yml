@@ -519,6 +519,7 @@ Resources:
       AWS::CloudFormation::Init:
         configSets:
           deploy_webserver:
+            - install_webserver
             - build_wordpress
             - install_wordpress
             - start_webserver
@@ -532,7 +533,7 @@ Resources:
                     "if [ ! -f /etc/httpd/conf.d/wordpress.conf ]; then\n",
                     "   touch /etc/httpd/conf.d/wordpress.conf\n",
                     "   echo 'ServerName 127.0.0.1:80' >> /etc/httpd/conf.d/wordpress.conf\n",
-                    "   echo 'DocumentRoot /var/www/wordpress' >> /etc/httpd/conf.d/"wordpress.conf\n",
+                    "   echo 'DocumentRoot /var/www/wordpress' >> /etc/httpd/conf.d/wordpress.conf\n",
                     "   echo '<Directory /var/www/wordpress>' >> /etc/httpd/conf.d/wordpress.conf\n",
                     "   echo '  Options Indexes FollowSymLinks' >> /etc/httpd/conf.d/wordpress.conf\n",
                     "   echo '  AllowOverride All' >> /etc/httpd/conf.d/wordpress.conf\n",
