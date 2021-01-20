@@ -154,8 +154,7 @@ Parameters:
     Description: The WordPress admin password.
     Type: String
     NoEcho: true
-    # TODO: Store below in SSM and read it from there
-    Default: Latambora1
+    # TODO: Store password in SSM and read it from there
   WPAdminEmail:
     AllowedPattern: ^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$
     Description: The WordPress admin email address.
@@ -209,7 +208,6 @@ Parameters:
     NoEcho: true
     Type: String
     # TODO: Store below in SSM and read it from there
-    Default: Latambora1
 
 Conditions:
   NoSslCertificate:
