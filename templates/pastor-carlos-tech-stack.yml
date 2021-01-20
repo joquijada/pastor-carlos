@@ -522,6 +522,33 @@ Resources:
             - build_wordpress
             - install_wordpress
             - start_webserver
+        install_webserver:
+          files:
+            /tmp/create_site_conf.sh:
+              content:
+                !Join [
+                  "",[
+                    "#!/bin/bash -xe\n",
+                    "if [ ! -f /etc/httpd/conf.d/wordpress.conf ]; then\n",
+                    "   touch /etc/httpd/conf.d/wordpress.conf\n",
+                    "   echo 'ServerName 127.0.0.1:80' >> /etc/httpd/conf.d/wordpress.conf\n",
+                    "   echo 'DocumentRoot /var/www/wordpress' >> /etc/httpd/conf.d/"wordpress.conf\n",
+                    "   echo '<Directory /var/www/wordpress>' >> /etc/httpd/conf.d/wordpress.conf\n",
+                    "   echo '  Options Indexes FollowSymLinks' >> /etc/httpd/conf.d/wordpress.conf\n",
+                    "   echo '  AllowOverride All' >> /etc/httpd/conf.d/wordpress.conf\n",
+                    "   echo '  Require all granted' >> /etc/httpd/conf.d/wordpress.conf\n",
+                    "   echo '</Directory>' >> /etc/httpd/conf.d/wordpress.conf\n",
+                    "fi\n"
+                  ]
+                ]
+              mode: 000500
+              owner: root
+              group: root
+          commands:
+            create_site_conf:
+              command: ./create_site_conf.sh
+              cwd: /tmp
+              ignoreErrors: false
         build_wordpress:
           files:
             /tmp/install_wordpress.sh:
